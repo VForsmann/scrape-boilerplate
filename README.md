@@ -1,5 +1,5 @@
-# node-boilerplate
-A boilerplate template for NodeJS projects.
+# scrape-boilerplate
+A boilerplate template for NodeJS-Web-Scraping projects.
 
 ## Setup
 1. Create a **.env** file in the root directory with following settings:

@@ -37,7 +37,10 @@
     "mongoose": "^5.9.25",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "uuidv4": "^6.2.2"
+    "uuidv4": "^6.2.2",
+    "request": "*",
+    "request-promise": "*",
+    "cheerio": "*"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

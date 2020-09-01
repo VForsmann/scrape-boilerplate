@@ -1,27 +1,3 @@
-/**
- * Nutzen der Config
- * Wird erweitert um Queue und Scrape-Klasse
- * Ein Scrape nutzt den Scraping Service zum persistieren
- */
-
-/**
- * Scraping Controller
- *
- * - Start: Für jeden Eintrag der Konfig wird Intervall gestartet und in die Queue geschoben mit CB: Scrape.start(url, function);
- */
-
-/**
- *  Scraping
- * 
- * - constructor: Request an die URL machen und nach gegebener config function (das wird auch da deklariert) ein Objekt erzeugen und das mittels Service in die DB schreiben
- */
-
- /**
-  * Queue
-  * 
-  * Hat so viele parallele Slots wie in der Config angegeben: Stellt eine Wartschlange von Callbacks dar. Maximale Anzahl ist da gegeben: Siehe stocks iwie
-  */
-
 import { Queue } from "../helpers/queue";
 
 export class ScrapingController {
@@ -34,7 +10,9 @@ export class ScrapingController {
 
     handleScrapings(scrapingConfig) {
         scrapingConfig.scrapings.forEach(scrapeData => {
+            // scraping in intervals
             setInterval(() => {
+                // queue cares: just 1 scraping at a time
                 this.queue.dispatchJob(async () => {
                     await Scrape.start(scrapeData);
                 })
@@ -44,13 +22,18 @@ export class ScrapingController {
 
 }
 
+const requestPromise = require('request-promise');
+const cheerio = require('cheerio');
 class Scrape {
 
     public static async start(scrapeData) {
-        await Scrape.timeout(1000);
-    }
+        try {
+            const html = await requestPromise(scrapeData.url);
+            const result = scrapeData.scraper(html, cheerio);
+            console.log(result);
+        } catch(error) {
+            console.warn("ERROR WHILE SCRAPING!", error)
+        }
 
-    static timeout(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }

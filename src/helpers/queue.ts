@@ -14,7 +14,7 @@ export class Queue {
     // dispatchJob saves the job with its resolver and rest arguments
     // It also starts the Execution
     async dispatchJob(cb, ...rest) {
-        if(this.log) console.log(this._jobs.length);
+        if(this.log) console.log("queue job length:" + this._jobs.length);
 
         await new Promise((resolve, reject) => {
             const now = Date.now();

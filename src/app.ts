@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 
 import { Route } from './interfaces/route.interface';
 import Mongo from './config/mongo.config';
+import Scraping from './config/scraping.config';
 import { Passport } from './config/passport.config';
 
 
@@ -24,6 +25,7 @@ class App {
    */
   public start(): express.Express {
     Mongo.connect();
+    Scraping.start();
     this.app.listen(3000, () => {
       console.info('\x1b[32m', `Server is running in http://localhost:${PORT}`)
     });

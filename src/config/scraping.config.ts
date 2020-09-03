@@ -15,7 +15,7 @@ const scrapingConfig : ScrapingConfig = {
         {
             url: "https://www.immobilienscout24.de/Suche/radius/haus-kaufen?centerofsearchaddress=Olfen;59399;;;;&geocoordinates=51.70655;7.374;5.0&enteredFrom=one_step_search/",
             scraper: standardScraper,
-            interval: 5000
+            interval: 30000
         }
     ]
 }
